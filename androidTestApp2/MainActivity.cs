@@ -14,6 +14,24 @@ namespace androidTestApp2
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
+
+            EditText phoneNumberText = FindViewById<EditText>(Resource.Id.PhoneNumberText);
+            TextView translatedPhoneWord = FindViewById<TextView>(Resource.Id.TranslatedPhoneword);
+            Button translateButton = FindViewById<Button>(Resource.Id.TranslateButton);
+
+            translateButton.Click += (sender, e) =>
+            {
+                string translatedNumber = Core.PhonewordTranslator.ToNumber(phoneNumberText.Text);
+
+                if (string.IsNullOrWhiteSpace(translatedNumber))
+                {
+                    translatedPhoneWord.Text = string.Empty;
+                }
+                else
+                {
+                    translatedPhoneWord.Text = translatedNumber;
+                }
+            };
         }
     }
 }
